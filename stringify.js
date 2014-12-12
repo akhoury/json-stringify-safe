@@ -1,6 +1,6 @@
-module.exports = stringify;
+(function(exports) {
 
-function getSerialize (fn, decycle) {
+  function getSerialize (fn, decycle) {
   var seen = [], keys = [];
   decycle = decycle || function(key, value) {
     return '[Circular ' + getPath(value, seen, keys) + ']'
@@ -37,3 +37,6 @@ function stringify(obj, fn, spaces, decycle) {
 }
 
 stringify.getSerialize = getSerialize;
+exports = stringify;
+
+})('undefined' === typeof window ? module.exports : window.stringify );
